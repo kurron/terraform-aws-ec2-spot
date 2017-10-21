@@ -1,5 +1,5 @@
 terraform {
-    required_version = ">= 0.10.6"
+    required_version = ">= 0.10.7"
     backend "s3" {}
 }
 
@@ -37,8 +37,14 @@ data "aws_ami" "lookup" {
     }
 }
 
-resource "aws_instance" "instance" {
+resource "aws_spot_instance_request" "instance" {
     count = "${var.instance_limit > "0" ? var.instance_limit : length( var.subnet_ids )}"
+
+    spot_price                      = "${var.spot_price}"
+    wait_for_fulfillment            = "false"
+    spot_type                       = "persistent"
+    instance_interruption_behaviour = "${var.instance_interruption_behaviour}"
+#   launch_group                    = "${var.launch_group}"
 
     ami                         = "${data.aws_ami.lookup.id}"
     ebs_optimized               = "${var.ebs_optimized}"

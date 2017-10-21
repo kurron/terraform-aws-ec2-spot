@@ -83,3 +83,19 @@ variable "instance_limit" {
     description = "A number indicating how many instances to create. A value of 0 creates one instance per subnet."
     default = "0"
 }
+
+variable "spot_price" {
+    type = "string"
+    description = "The maximum hourly price (bid) you are willing to pay for the instance, e.g. 0.10"
+}
+
+variable "launch_group" {
+    type = "string"
+    description = "Group name to assign the instances to so they can be started/stopped in unison, e.g. purple-plutonium"
+    default = "defaulted"
+}
+
+variable "instance_interruption_behaviour" {
+    type = "string"
+    description = "whether a Spot instance stops or terminates when it is interrupted, can be stop or terminate"
+}

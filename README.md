@@ -1,7 +1,7 @@
 # Overview
 This Terraform module creates EC2 instances into the provided subnets.
 The subnet defaults will determine if the instances get public ip address
-or not.
+or not.  The instances are pulled from the Spot Market.
 
 # Prerequisites
 * [Terraform](https://terraform.io/) installed and working
